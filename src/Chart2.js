@@ -15,7 +15,7 @@ const ColumnChart2 = () => {
 		},
 		yAxis: {
 			title: {
-				text: "Value",
+				text: "",
 			},
 		},
 		series: [
