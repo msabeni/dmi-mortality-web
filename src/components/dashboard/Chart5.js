@@ -8,7 +8,7 @@ const ColumnChart5 = () => {
 		"Nakuru Level 6",
 		"Loitokitok SCRH",
 		"Makueni CRH",
-		"Busia CRH",
+		"Makueni CRH",
 	];
 	const options = {
 		chart: { type: "bar" },

@@ -11,7 +11,7 @@ const ColumnChart2 = () => {
 			text: "Enrollment By Health Facility",
 		},
 		xAxis: {
-			categories: ["Nakuru CRH", "Loitoktok CRH", "Busia CRH", "Kapenguria CRH", "Makueni CRH"],
+			categories: ["Screened", "Eligible", "Enrolled", "Sample collected", "COVID-19 Postive"],
 		},
 		yAxis: {
 			title: {
@@ -20,7 +20,7 @@ const ColumnChart2 = () => {
 		},
 		series: [
 			{
-				name: "No of Cases",
+				name: "Series 1",
 				data: [10, 20, 30, 40, 50].reverse(),
 				color: "purple",
 			},
