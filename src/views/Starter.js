@@ -1,13 +1,5 @@
 import { TabContent, TabPane, Nav, NavItem, NavLink, Col, Row, Card } from "reactstrap";
-import SalesChart from "../components/dashboard/SalesChart";
-import Feeds from "../components/dashboard/Feeds";
-import ProjectTables from "../components/dashboard/ProjectTable";
 import TopCards from "../components/dashboard/TopCards";
-import Blog from "../components/dashboard/Blog";
-import bg1 from "../assets/images/bg/bg1.jpg";
-import bg2 from "../assets/images/bg/bg2.jpg";
-import bg3 from "../assets/images/bg/bg3.jpg";
-import bg4 from "../assets/images/bg/bg4.jpg";
 import Gauge from "../components/dashboard/Gauge";
 import classnames from "classnames";
 import { useState } from "react";
@@ -19,41 +11,9 @@ import PieChart from './../components/dashboard/Chart3';
 import ColumnChart5 from './../components/dashboard/Chart5';
 import PieChart2 from './../components/dashboard/Chart6';
 import ColumnChart7 from './../components/dashboard/Chart7';
-
-const BlogData = [
-  {
-    image: bg1,
-    title: "This is simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg2,
-    title: "Lets be simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg3,
-    title: "Don't Lamp blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg4,
-    title: "Simple is beautiful",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-];
+import Filter from "../components/dashboard/Filters";
+import DateFilter from "../components/dashboard/DateFilter";
+import Overview from "../components/dashboard/Blog";
 
 const Starter = () => {
 	// State for current active Tab
@@ -65,6 +25,51 @@ const Starter = () => {
 	};
 	return (
 		<div>
+			<Row>
+				<Col>
+					<Filter
+						data={[
+							{ value: "facility A", label: "facility A" },
+							{ value: "facility B", label: "facility B" },
+							{ value: "facility C", label: "facility C" },
+						]}
+						holder={"facilities"}
+					/>
+				</Col>
+				<Col>
+					<Filter
+						data={[
+							{ value: "county A", label: "county A" },
+							{ value: "county B", label: "county B" },
+							{ value: "county C", label: "county C" },
+						]}
+						holder={"counties"}
+					/>
+				</Col>
+				<Col>
+					<Filter
+						data={[
+							{ value: "male", label: "male" },
+							{ value: "female", label: "female" },
+						]}
+						holder={"gender"}
+					/>
+				</Col>
+				<Col>
+					<Filter
+						data={[
+							{ value: "0-4 yrs", label: "0-4 yrs" },
+							{ value: "5-9 yrs", label: "5-9 yrs" },
+							{ value: "15-34 yrs", label: "15-34 yrs" },
+							{ value: "35-55 yrs", label: "35-55 yrs" },
+						]}
+						holder={"age group"}
+					/>
+				</Col>
+				<Col>
+					<DateFilter />
+				</Col>
+			</Row>
 			<Nav tabs>
 				<NavItem>
 					<NavLink
@@ -87,7 +92,7 @@ const Starter = () => {
 							toggle("2");
 						}}
 					>
-						Tab2
+						Participants
 					</NavLink>
 				</NavItem>
 				<NavItem>
@@ -99,7 +104,7 @@ const Starter = () => {
 							toggle("3");
 						}}
 					>
-						Tab3
+						Enrollments
 					</NavLink>
 				</NavItem>
 				<NavItem>
@@ -111,21 +116,22 @@ const Starter = () => {
 							toggle("4");
 						}}
 					>
-						Tab4
+						Covid19 Results
 					</NavLink>
 				</NavItem>
 			</Nav>
 			<TabContent activeTab={currentActiveTab}>
 				<TabPane tabId="1">
 					{/***Top Cards***/}
-					<div>
+					<div className="my-3">
+						<Overview />
 						<h3 className="mb-0 font-weight-bold text-center">Screening</h3>
 						<Row>
 							<Col sm="6" lg="4">
-								<TopCards subtitle="Screened" earning="114002" />
+								<TopCards subtitle="Screened" earning={114002} />
 							</Col>
 							<Col sm="6" lg="4">
-								<TopCards subtitle="Eligible" earning="20340" />
+								<TopCards subtitle="Eligible" earning={20340} />
 							</Col>
 							<Col sm="6" lg="4">
 								<Gauge value1={20340} value2={114002} subtitle="Eligible" />
@@ -134,10 +140,10 @@ const Starter = () => {
 						<h3 className="mb-0 font-weight-bold text-center">Enrollment</h3>
 						<Row>
 							<Col sm="6" lg="4">
-								<TopCards subtitle="Eligible" earning="20340" />
+								<TopCards subtitle="Eligible" earning={20340} />
 							</Col>
 							<Col sm="6" lg="4">
-								<TopCards subtitle="Enrolled" earning="15340" />
+								<TopCards subtitle="Enrolled" earning={15340} />
 							</Col>
 							<Col sm="6" lg="4">
 								<Gauge value1={15340} value2={20340} subtitle="Enrolled" />
@@ -146,10 +152,10 @@ const Starter = () => {
 						<h3 className="mb-0 font-weight-bold text-center">Sample Collection</h3>
 						<Row>
 							<Col sm="6" lg="4">
-								<TopCards subtitle="Eligible For Sampling" earning="15340" />
+								<TopCards subtitle="Eligible For Sampling" earning={15340} />
 							</Col>
 							<Col sm="6" lg="4">
-								<TopCards subtitle="Sampled" earning="9440" />
+								<TopCards subtitle="Sampled" earning={9440} />
 							</Col>
 							<Col sm="6" lg="4">
 								<Gauge value1={9440} value2={15340} subtitle="Sampled" />
@@ -157,8 +163,7 @@ const Starter = () => {
 						</Row>
 					</div>
 				</TabPane>
-				<TabPane tabId="2">
-					<h3 className="mb-0 font-weight-bold text-center">Mortality Dashboards</h3>
+				<TabPane className="my-3" tabId="2">
 					<Row>
 						<Col sm="6">
 							<Card variant="outlined">
@@ -172,8 +177,7 @@ const Starter = () => {
 						</Col>
 					</Row>
 				</TabPane>
-				<TabPane tabId="3">
-					<h3 className="mb-0 font-weight-bold text-center">Participants Characteristics</h3>
+				<TabPane className="my-3" tabId="3">
 					<Row>
 						<Col sm="4">
 							<Card variant="outlined">
@@ -192,8 +196,7 @@ const Starter = () => {
 						</Col>
 					</Row>
 				</TabPane>
-				<TabPane tabId="4">
-					<h3 className="mb-0 font-weight-bold text-center">COVID-19 Results</h3>
+				<TabPane className="my-3" tabId="4">
 					<Row>
 						<Col sm="4">
 							<Card variant="outlined">
